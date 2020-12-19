@@ -1,34 +1,14 @@
 const judgeVegetable = function (vegetables, metric) {
+  // hold winning values for comparison
   let provisionalWinnerScore = 0;
   let provisionalWinner;
 
-  for (let vegetable in vegetables) {
-    if (vegetable[metric] > provisionalWinnerScore) {
-      provisionalWinnerScore = vegetable[metric];
-      provisionalWinnerScore = vegetable['submitter'];
+  // loop through all the items in the vegetables array
+  for (let vegetable of vegetables) {
+    if (vegetable[metric] > provisionalWinnerScore) { // compare the vegetable to the provisional winner
+      provisionalWinnerScore = vegetable[metric]; // update the high score
+      provisionalWinner = vegetable['submitter']; // update the winner
     }
   }
   return provisionalWinner;
 }
-
-
-const vegetables = [
-  {
-    submitter: 'Old Man Franklin',
-    redness: 10,
-    plumpness: 5
-  },
-  {
-    submitter: 'Sally Tomato-Grower',
-    redness: 2,
-    plumpness: 8
-  },
-  {
-    submitter: 'Hamid Hamidson',
-    redness: 4,
-    plumpness: 3
-  }
-]
-
-// console.log(judgeVegetable(vegetables, 'redness'));
-judgeVegetable(vegetables, 'redness');
