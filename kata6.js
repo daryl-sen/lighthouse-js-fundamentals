@@ -1,36 +1,21 @@
 const whereCanIPark = function (spots, vehicle) {
-  let coords;
   // extract the vehicle initial (r, s, or m), and convert it into the upper case, corresponding to an available spot for this specific vehicle type.
   const vehicle_type = vehicle[0].toUpperCase(); 
 
-  function spotFitting(v_type, spot_status) {
-    switch (v_type) {
-      case 'R':
-        (spot_status === 'R') ? true: false;
-        break;
-      case 'S':
-        (spot_status === 'R' || spot_status === 'S') ? true: false;
-        break;
-      case 'M':
-        (spot_status) ? true: false;
-        break;
-    }
-  }
-
   for (let y = 0; y < spots.length; y++) {
     for (let x = 0; x < spots[y].length; x++) {
-      if (spotFitting(vehicle_type, spots[y][x])) {
-        coords = [x, y];
+      if (vehicle_type === 'R' && spots[y][x] === vehicle_type) {
+        return [x, y];
+      }
+      else if (vehicle_type === 'S' && (spots[y][x] === 'R' || spots[y][x] === 'S')) {
+        return [x, y];
+      }
+      else if (vehicle_type === 'M' && (spots[y][x] === 'R' || spots[y][x] === 'S' || spots[y][x] === 'M')) {
+        return [x, y];
       }
     }
   }
-
-  if (coords === undefined) {
-    return false;
-  }
-  else {
-    return coords;
-  }
+  return false;
 };
 
 
